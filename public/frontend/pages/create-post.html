@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post - BlogFire</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/editor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.snow.css">
+  <script src="../js/components/componentLoader.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+<script>
+  ComponentLoader.loadComponent("../components/header.html", "#header-container");
+</script>
+
+    <!-- Create Post Section -->
+    <section class="editor-section">
+        <div class="container">
+            <div class="editor-container">
+                <h1 class="section-title">Create New Post</h1>
+                
+                <div class="editor-alert hidden" id="editor-alert"></div>
+                
+                <form class="editor-form" id="post-form">
+                    <div class="form-group">
+                        <label for="post-title">Title</label>
+                        <input type="text" id="post-title" name="title" required placeholder="Enter post title">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-excerpt">Excerpt</label>
+                        <textarea id="post-excerpt" name="excerpt" rows="3" placeholder="Brief summary of your post"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Featured Image</label>
+                        <div class="image-upload-container">
+                            <div class="image-preview" id="image-preview">
+                                <i class="fas fa-image"></i>
+                                <p>No image selected</p>
+                            </div>
+                            <div class="image-upload-controls">
+                                <label for="post-image" class="btn btn-outline">
+                                    <i class="fas fa-upload"></i> Upload Image
+                                </label>
+                                <input type="file" id="post-image" name="image" accept="image/*" hidden>
+                                <button type="button" class="btn btn-danger" id="remove-image" disabled>
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-content">Content</label>
+                        <div id="editor-container"></div>
+                        <input type="hidden" id="post-content" name="content">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-tags">Tags</label>
+                        <div class="tags-input-container">
+                            <div class="tags-container" id="tags-container"></div>
+                            <input type="text" id="tag-input" placeholder="Add a tag and press Enter">
+                            <input type="hidden" id="post-tags" name="tags">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-category">Category</label>
+                        <select id="post-category" name="category" required>
+                            <option value="" disabled selected>Select a category</option>
+                            <option value="technology">Technology</option>
+                            <option value="lifestyle">Lifestyle</option>
+                            <option value="travel">Travel</option>
+                            <option value="food">Food</option>
+                            <option value="health">Health</option>
+                            <option value="business">Business</option>
+                            <option value="education">Education</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="save-draft">Save as Draft</button>
+                        <button type="submit" class="btn btn-primary">Publish Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+<script>
+  ComponentLoader.loadComponent("../components/footer.html", "#footer-container");
+</script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="../js/services/firebase-config.js"></script>
+    
+    <!-- Utilities -->
+    <script src="../js/utils/utils.js"></script>
+    
+    <!-- Quill Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.min.js"></script>
+    
+    <!-- Auth & Post Scripts -->
+    <script src="../js/pages/auth.js"></script>
+    <script src="../js/pages/editor.js"></script>
+</body>
+</html>

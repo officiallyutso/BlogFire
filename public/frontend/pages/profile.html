@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - BlogFire</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="../js/components/componentLoader.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+<script>
+  ComponentLoader.loadComponent("../components/header.html", "#header-container");
+</script>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-container" id="profile-container">
+                <div class="profile-loading">
+                    <div class="spinner"></div>
+                    <p>Loading profile...</p>
+                </div>
+            </div>
+            
+            <!-- User Posts -->
+            <div class="user-posts">
+                <div class="user-posts-header">
+                    <h2 class="section-title">My Posts</h2>
+                    <a href="create-post.html" class="btn btn-primary">Create New Post</a>
+                </div>
+                
+                <div class="posts-tabs">
+                    <button class="tab-btn active" data-tab="published">Published</button>
+                    <button class="tab-btn" data-tab="drafts">Drafts</button>
+                </div>
+                
+                <div class="tab-content active" id="published-posts">
+                    <div class="posts-loading">
+                        <div class="spinner"></div>
+                        <p>Loading posts...</p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="draft-posts">
+                    <div class="posts-loading">
+                        <div class="spinner"></div>
+                        <p>Loading drafts...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+<script>
+  ComponentLoader.loadComponent("../components/footer.html", "#footer-container");
+</script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="../js/services/firebase-config.js"></script>
+    
+    <!-- Utilities -->
+    <script src="../js/utils/utils.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="../js/pages/auth.js"></script>
+    <script src="../js/pages/profile.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+</html>

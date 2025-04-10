@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Following - BlogFire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/profile.css">
+  <script src="../js/components/componentLoader.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+<script>
+  ComponentLoader.loadComponent("../components/header.html", "#header-container");
+</script>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Following</h2>
+                    <a href="#" id="back-link" class="btn btn-outline btn-sm">
+                        <i class="fas fa-arrow-left"></i> Back to Profile
+                    </a>
+                </div>
+                
+                <div class="users-list" id="following-list">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Loading following...</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+<script>
+  ComponentLoader.loadComponent("../components/footer.html", "#footer-container");
+</script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="../js/services/firebase-config.js"></script>
+
+    <!-- App Scripts -->
+    <script src="../js/pages/auth.js"></script>
+    <script src="../js/pages/follows.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const followingListEl = document.getElementById('following-list');
+            const backLinkEl = document.getElementById('back-link');
+            
+            // Get user ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = urlParams.get('id');
+            
+            if (!userId) {
+                followingListEl.innerHTML = '<p class="error">User ID not provided.</p>';
+                return;
+            }
+            
+            // Set back link
+            backLinkEl.href = `profile.html?id=${userId}`;
+            
+            // Wait for follows module to initialize
+            setTimeout(async () => {
+                try {
+                    // Get following
+                    const following = await window.followsModule.getFollowing(userId);
+                    
+                    if (following.length === 0) {
+                        followingListEl.innerHTML = '<p class="no-users">Not following anyone yet.</p>';
+                        return;
+                    }
+                    
+                    // Render following
+                    let html = '';
+                    
+                    for (const user of following) {
+                        const photoURL = user.photoURL || 'https://via.placeholder.com/50';
+                        
+                        html += `
+                            <div class="user-item">
+                                <div class="user-item__avatar">
+                                    <a href="profile.html?id=${user.id}">
+                                        <img src="${photoURL}" alt="${user.username}" loading="lazy">
+                                    </a>
+                                </div>
+                                <div class="user-item__info">
+                                    <h3 class="user-item__name">
+                                        <a href="profile.html?id=${user.id}">${user.username}</a>
+                                    </h3>
+                                    <p class="user-item__bio">${user.bio || 'No bio available'}</p>
+                                </div>
+                                <div class="user-item__action">
+                                                                        <button class="btn btn-sm btn-outline follow-btn following" data-id="${user.id}">
+                                        <i class="fas fa-user-check"></i> Following
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    followingListEl.innerHTML = html;
+                    
+                    // Add follow button event listeners
+                    document.querySelectorAll('.follow-btn').forEach(btn => {
+                        const userId = btn.getAttribute('data-id');
+                        
+                        // Add click event
+                        btn.addEventListener('click', async () => {
+                            const isFollowing = btn.classList.contains('following');
+                            
+                            if (isFollowing) {
+                                await window.followsModule.unfollowUser(userId);
+                                btn.classList.remove('following');
+                                btn.innerHTML = '<i class="fas fa-user-plus"></i> Follow';
+                            } else {
+                                await window.followsModule.followUser(userId);
+                                btn.classList.add('following');
+                                btn.innerHTML = '<i class="fas fa-user-check"></i> Following';
+                            }
+                        });
+                    });
+                } catch (error) {
+                    console.error('Error loading following:', error);
+                    followingListEl.innerHTML = '<p class="error">Error loading following. Please try again later.</p>';
+                }
+            }, 1000); // Wait for follows module to initialize
+        });
+    </script>
+</body>
+</html>

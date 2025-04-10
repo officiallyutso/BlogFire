@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post - BlogFire</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/post.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="../js/components/componentLoader.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+<script>
+  ComponentLoader.loadComponent("../components/header.html", "#header-container");
+</script>
+
+    <!-- Post Content -->
+    <main class="main">
+        <div class="container">
+            <div class="post-container" id="post-container">
+                <div class="post-loading">
+                    <div class="spinner"></div>
+                    <p>Loading post...</p>
+                </div>
+            </div>
+            
+            <!-- Related Posts -->
+            <section class="related-posts">
+                <h2 class="section-title">Related Posts</h2>
+                <div class="posts-grid" id="related-posts-container">
+                    <div class="posts-loading">
+                        <div class="spinner"></div>
+                        <p>Loading related posts...</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+<script>
+  ComponentLoader.loadComponent("../components/footer.html", "#footer-container");
+</script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="../js/services/firebase-config.js"></script>
+    
+    <!-- Utilities -->
+    <script src="../js/utils/utils.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="../js/pages/auth.js"></script>
+    <script src="../js/components/posts.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - BlogFire</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="../js/components/componentLoader.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+<script>
+  ComponentLoader.loadComponent("../components/header.html", "#header-container");
+</script>
+
+    <!-- Register Form -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-form-container">
+                    <h1 class="auth-title">Create an Account</h1>
+                    <p class="auth-subtitle">Join our community and start sharing your stories!</p>
+                    
+                    <div class="auth-alert hidden" id="auth-alert"></div>
+                    
+                    <form class="auth-form" id="register-form">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <div class="input-group">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="username" name="username" required placeholder="Choose a username">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <div class="input-group">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="password" name="password" required placeholder="Create a password">
+                                <button type="button" class="password-toggle" id="password-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength" id="password-strength">
+                                <div class="strength-meter">
+                                    <div class="strength-meter-fill" id="strength-meter-fill"></div>
+                                </div>
+                                <div class="strength-text" id="strength-text">Password strength</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm your password">
+                            </div>
+                        </div>
+                        
+                        <div class="form-options">
+                            <div class="terms">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <label for="terms">I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a></label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                        
+                        <div class="auth-divider">
+                            <span>OR</span>
+                        </div>
+                        
+                        <button type="button" class="btn btn-outline btn-block social-login" id="google-register">
+                            <i class="fab fa-google"></i> Register with Google
+                        </button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="login.html">Login</a></p>
+                    </div>
+                </div>
+                
+                <div class="auth-image">
+                    <img src="https://images.unsplash.com/photo-1514064019862-23e2a332a6a6?q=80&w=1914&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==" alt="Register Image">
+                    <div class="auth-image-overlay">
+                        <div class="auth-image-content">
+                            <h2>Join Our Community</h2>
+                            <p>Connect with writers and readers who share your passion for storytelling.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+<script>
+  ComponentLoader.loadComponent("../components/footer.html", "#footer-container");
+</script>
+
+    <!-- At the end of your register.html file, before the closing </body> tag -->
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="../js/services/firebase-config.js"></script>
+    
+    <!-- Utilities -->
+    <script src="../js/utils/utils.js"></script>
+    
+    <!-- Auth Scripts -->
+    <script src="../js/pages/auth.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+</html>
